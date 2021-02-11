@@ -1,7 +1,7 @@
 #Some Makefile for CLASS.
 #Julien Lesgourgues, 28.11.2011
 
-MDIR := $(shell pwd)
+MDIR := $(shell pwd | sed 's: :\\ :g')
 WRKDIR = $(MDIR)/build
 
 .base:
