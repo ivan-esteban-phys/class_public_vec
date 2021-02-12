@@ -320,6 +320,19 @@ int background_functions(
     rho_m += pvecback[pba->index_bg_rho_cdm];
   }
 
+  if (pba->has_cdm_vec == _TRUE_) {
+    const double _eV4_to_rho_class = 8*M_PI*_G_/3 / (pow(_h_P_/(2*_PI_), 3) * pow(_c_, 7)) * pow(_Mpc_over_m_, 2) * pow(_eV_, 4); // Multiply by this to convert eV^4 to CLASS units
+    
+    double rho_cdm = pba->cdm_vec_f * pvecback[pba->index_bg_rho_cdm];
+    double rho_cdm_eV4 = rho_cdm / _eV4_to_rho_class;
+    // pba->cdm_vec_assym = (n+ - n-)/(n+ + n-);
+    
+    rho_tot += 0.5 * pow(pba->cdm_vec_assym, 2) * rho_cdm * (rho_cdm_eV4 * pba->cdm_vec_Geff) / pow( 1 + rho_cdm_eV4 * pba->cdm_vec_Geff, 2);
+    p_tot += 0.5 * pow(pba->cdm_vec_assym, 2) * rho_cdm * (rho_cdm_eV4 * pba->cdm_vec_Geff) / pow( 1 + rho_cdm_eV4 * pba->cdm_vec_Geff, 2);
+
+    dp_dloga += -3 * pow(pba->cdm_vec_assym, 2) * rho_cdm * (rho_cdm_eV4 * pba->cdm_vec_Geff) / pow( 1 + rho_cdm_eV4 * pba->cdm_vec_Geff, 3);
+  }
+
   /* dcdm */
   if (pba->has_dcdm == _TRUE_) {
     /* Pass value of rho_dcdm to output */
@@ -876,6 +889,7 @@ int background_indices(
   /** - initialize all flags: which species are present? */
 
   pba->has_cdm = _FALSE_;
+  pba->has_cdm_vec = _FALSE_;
   pba->has_ncdm = _FALSE_;
   pba->has_dcdm = _FALSE_;
   pba->has_dr = _FALSE_;
@@ -889,6 +903,9 @@ int background_indices(
 
   if (pba->Omega0_cdm != 0.)
     pba->has_cdm = _TRUE_;
+
+  if (pba->cdm_vec_Geff != 0.)
+    pba->has_cdm_vec = _TRUE_;
 
   if (pba->Omega0_ncdm_tot != 0.)
     pba->has_ncdm = _TRUE_;

@@ -82,6 +82,10 @@ struct background
 
   double Omega0_ur; /**< \f$ \Omega_{0 \nu r} \f$: ultra-relativistic neutrinos */
 
+  double cdm_vec_Geff; /**< g^2 / (M_gamma^2 * m_0^2) [eV^-4] for vector interactions among CDM */
+  double cdm_vec_f; /**< Fraction of DM with self-interactions */
+  double cdm_vec_assym; /**< Dark matter asymmetry: (n+ - n-)/(n+ + n-) */
+  
   double Omega0_idr; /**< \f$ \Omega_{0 idr} \f$: interacting dark radiation */
   double T_idr;      /**< \f$ T_{idr} \f$: current temperature of interacting dark radiation in Kelvins */
 
@@ -295,6 +299,7 @@ struct background
   //@{
 
   short has_cdm;       /**< presence of cold dark matter? */
+  short has_cdm_vec;   /**< presence of vector interactions among cold dark matter? */
   short has_dcdm;      /**< presence of decaying cold dark matter? */
   short has_dr;        /**< presence of relativistic decay radiation? */
   short has_scf;       /**< presence of a scalar field? */
