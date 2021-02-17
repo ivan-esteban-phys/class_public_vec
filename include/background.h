@@ -85,6 +85,7 @@ struct background
   double cdm_vec_Geff; /**< g^2 / (M_gamma^2 * m_0^2) [eV^-4] for vector interactions among CDM */
   double cdm_vec_f; /**< Fraction of DM with self-interactions */
   double cdm_vec_assym; /**< Dark matter asymmetry: (n+ - n-)/(n+ + n-) */
+  double cdm_vec_zthresh; /**< Redshift at which self-interactions turn on */
   
   double Omega0_idr; /**< \f$ \Omega_{0 idr} \f$: interacting dark radiation */
   double T_idr;      /**< \f$ T_{idr} \f$: current temperature of interacting dark radiation in Kelvins */

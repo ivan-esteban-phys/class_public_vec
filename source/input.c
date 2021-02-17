@@ -930,6 +930,13 @@ int input_read_parameters(
     pba->cdm_vec_assym = param1;
   else
     pba->cdm_vec_assym = 1.0;
+  class_call(parser_read_double(pfc,"cdm_vec_zthresh",&param1,&flag1,errmsg),
+             errmsg,
+             errmsg);
+  if (flag1 == _TRUE_)
+    pba->cdm_vec_zthresh = param1;
+  else
+    pba->cdm_vec_zthresh = 1e8;
 
   /** - Omega_0_icdm_dr (DM interacting with DR) */
   class_call(parser_read_double(pfc,"Omega_idm_dr",&param1,&flag1,errmsg),

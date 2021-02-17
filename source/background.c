@@ -320,7 +320,8 @@ int background_functions(
     rho_m += pvecback[pba->index_bg_rho_cdm];
   }
 
-  if (pba->has_cdm_vec == _TRUE_) {
+  if (pba->has_cdm_vec == _TRUE_ &&
+      (1 - a_rel)/a_rel < pba->cdm_vec_zthresh) {
     const double _eV4_to_rho_class = 8*M_PI*_G_/3 / (pow(_h_P_/(2*_PI_), 3) * pow(_c_, 7)) * pow(_Mpc_over_m_, 2) * pow(_eV_, 4); // Multiply by this to convert eV^4 to CLASS units
     
     double rho_cdm = pba->cdm_vec_f * pvecback[pba->index_bg_rho_cdm];
